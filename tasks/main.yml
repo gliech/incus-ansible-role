@@ -1,5 +1,5 @@
 ---
-# Conflicts with iptables-nft which is required by lxd
+# Conflicts with iptables-nft which is required by incus
 - name: Remove iptables
   community.general.pacman:
     name: iptables
@@ -8,44 +8,44 @@
   become: yes
   when: ansible_os_family == 'Archlinux'
 
-- name: Install lxd
+- name: Install incus
   ansible.builtin.package:
-    name: lxd
+    name: incus
     state: present
   become: yes
 
-- name: Add users to lxd group
+- name: Add users to incus group
   ansible.builtin.user:
     name: "{{ ansible_user_id }}"
     groups:
-      - lxd
+      - incus
     append: yes
-  loop: "{{ [ansible_user_id] | union(lxd_extra_users) }}"
+  loop: "{{ [ansible_user_id] | union(incus_extra_users) }}"
   become: yes
 
 - name: Reload user groups
   ansible.builtin.meta: reset_connection
 
-- name: Start lxd service
+- name: Start incus service
   ansible.builtin.systemd:
-    name: lxd.service
+    name: incus.service
     state: started
     enabled: yes
   become: yes
 
-- name: Get lxd config
+- name: Get incus config
   ansible.builtin.command:
-    cmd: lxd init --dump
-  register: lxd_current_config
+    cmd: incus admin init --dump
+  register: incus_current_config
   changed_when: false
 
-- name: Update lxd config
+- name: Update incus config
   ansible.builtin.command:
-    cmd: lxd init --preseed
-    stdin: "{{ lxd_config | to_yaml }}"
-  notify: restart_lxd
+    cmd: incus admin init --preseed
+    stdin: "{{ incus_config | to_yaml }}"
+  notify: restart_incus
   changed_when: true
-  when: lxd_config != lxd_current_config.stdout | from_yaml
+  when: incus_config != incus_current_config.stdout | from_yaml
 
 - name: Define subuid/subgid files
   ansible.builtin.template:
@@ -56,7 +56,7 @@
     - subuid
     - subgid
   become: yes
-  notify: restart_lxd
+  notify: restart_incus
 
 - name: Set lxc default config
   ansible.builtin.template:
@@ -64,4 +64,4 @@
     dest: /etc/lxc/default.conf
     mode: 0644
   become: yes
-  notify: restart_lxd
+  notify: restart_incus

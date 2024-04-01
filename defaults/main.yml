@@ -1,4 +1,4 @@
 ---
-lxd_extra_users: []
-lxd_subid_offset: 1000000
-lxd_subid_range: 6553600
+incus_extra_users: []
+incus_subid_offset: 1000000
+incus_subid_range: 6553600

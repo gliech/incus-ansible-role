@@ -2,24 +2,23 @@
 - name: Converge
   hosts: all
   tasks:
-    - name: "Import lxd"
+    - name: "Import incus"
       ansible.builtin.import_role:
-        name: "gliech.lxd"
+        name: "gliech.incus"
       vars:
-        lxd_config:
+        incus_config:
           config: {}
           networks: []
           storage_pools:
             - config:
-                source: /var/lib/lxd/storage-pools/default
+                source: /var/lib/incus/storage-pools/default
               description: ""
               name: default
               driver: dir
-          storage_volumes: []
           profiles:
             - config:
                 security.privileged: "true"
-              description: Default LXD profile
+              description: Default Incus profile
               devices:
                 root:
                   path: /
@@ -34,5 +33,5 @@
                 features.profiles: "true"
                 features.storage.buckets: "true"
                 features.storage.volumes: "true"
-              description: Default LXD project
+              description: Default Incus project
               name: default

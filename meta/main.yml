@@ -1,10 +1,10 @@
 ---
 dependencies: []
 galaxy_info:
-  role_name: lxd
+  role_name: incus
   author: gliech
-  description: Install lxd from the os package manager and configure it using a
-    preseed object.
+  description: Install incus from the os package manager and configure it using
+    a preseed object.
   license: GPL-3.0-only
   min_ansible_version: "2.9"
   platforms:

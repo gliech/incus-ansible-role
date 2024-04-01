@@ -1,7 +1,7 @@
 ---
-- name: Restart lxd
+- name: Restart incus
   ansible.builtin.systemd:
-    name: lxd.service
+    name: incus.service
     state: restarted
-  listen: restart_lxd
+  listen: restart_incus
   become: yes
