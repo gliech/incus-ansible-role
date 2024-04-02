@@ -14,11 +14,11 @@
     state: present
   become: yes
 
-- name: Add users to incus group
+- name: Add users to incus-admin group
   ansible.builtin.user:
     name: "{{ ansible_user_id }}"
     groups:
-      - incus
+      - incus-admin
     append: yes
   loop: "{{ [ansible_user_id] | union(incus_extra_users) }}"
   become: yes
