@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/gliech/incus-ansible-role/compare/v1.0.0...v1.0.1) (2024-04-02)
+
+
+### Bug Fixes
+
+* use correct group incus-admin instead of incus for non-root api access ([24542f1](https://github.com/gliech/incus-ansible-role/commit/24542f1ab2d3552dc7ef3cdccf4b3f9c80a48e0f))
+
 # 1.0.0 (2024-04-01)
 
 
