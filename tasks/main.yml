@@ -45,7 +45,18 @@
     stdin: "{{ incus_config | to_yaml }}"
   notify: restart_incus
   changed_when: true
-  when: incus_config != incus_current_config.stdout | from_yaml
+  when: incus_config !=
+    incus_current_config.stdout |
+    from_yaml |
+    moreati.jq.jq('delpaths([
+      paths |
+      select(
+        .[-1] |
+        strings |
+        startswith("volatile.")
+      )
+    ])')
+
 
 - name: Define subuid/subgid files
   ansible.builtin.template:
