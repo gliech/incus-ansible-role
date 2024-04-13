@@ -1,3 +1,15 @@
+## [1.0.2](https://github.com/gliech/incus-ansible-role/compare/v1.0.1...v1.0.2) (2024-04-13)
+
+
+### Bug Fixes
+
+* filter volatile values ([170f3e2](https://github.com/gliech/incus-ansible-role/commit/170f3e2e76a5bade999ef9c24081c4f29e0303f4))
+
+
+### Documentation
+
+* mention jq requirement ([55101de](https://github.com/gliech/incus-ansible-role/commit/55101deea783ef51c1b749ab06d508add3103812))
+
 ## [1.0.1](https://github.com/gliech/incus-ansible-role/compare/v1.0.0...v1.0.1) (2024-04-02)
 
 
