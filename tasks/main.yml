@@ -33,30 +33,19 @@
     enabled: yes
   become: yes
 
-- name: Get incus config
+- name: Get old incus config
   ansible.builtin.command:
     cmd: incus admin init --dump
-  register: incus_current_config
+  register: incus_old_config
   changed_when: false
 
 - name: Update incus config
-  ansible.builtin.command:
-    cmd: incus admin init --preseed
+  ansible.builtin.shell:
+    cmd: incus admin init --preseed && incus admin init --dump
     stdin: "{{ incus_config | to_yaml }}"
+  register: incus_new_config
+  changed_when: incus_old_config.stdout != incus_new_config.stdout
   notify: restart_incus
-  changed_when: true
-  when: incus_config !=
-    incus_current_config.stdout |
-    from_yaml |
-    moreati.jq.jq('delpaths([
-      paths |
-      select(
-        .[-1] |
-        strings |
-        startswith("volatile.")
-      )
-    ])')
-
 
 - name: Define subuid/subgid files
   ansible.builtin.template:

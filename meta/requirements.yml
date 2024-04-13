@@ -1,5 +1,0 @@
----
-roles: []
-collections:
-  - name: moreati.jq
-    version: 0.2.1
