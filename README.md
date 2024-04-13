@@ -7,7 +7,7 @@ using a preseed object.
 
 ## Requirements
 
-None.
+`jq` is required on the execution host.
 
 ## Role Variables
 

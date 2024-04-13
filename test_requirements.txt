@@ -3,3 +3,4 @@ molecule == 24.*
 molecule-plugins[podman] == 23.*
 yamllint == 1.*
 ansible-lint == 24.*
+jq == 1.*
