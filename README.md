@@ -70,7 +70,7 @@ projects:
 </td></tr>
 
 
-<tr><td><code>incus</code></td>
+<tr><td><code>incus_extra_users</code></td>
 <td>no</td>
 <td>list(string)</td>
 <td>
